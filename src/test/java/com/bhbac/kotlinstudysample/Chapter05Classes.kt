@@ -287,7 +287,7 @@ fun <T> time(body: () -> T): Pair<T, Long> {
     return v to endTime - startTime
 }
 
-inline fun <T> inTime(body: () -> T): Pair<T, Long> {
+inline fun <T> inNanoTime(body: () -> T): Pair<T, Long> {
     val startTime = System.nanoTime()
     val v = body()
     val endTime = System.nanoTime()

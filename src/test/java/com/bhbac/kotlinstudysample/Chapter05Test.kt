@@ -157,8 +157,8 @@ fun main() {
     val pairVal = time { Thread.sleep(100) }
     println("pairVal.first = ${pairVal.first}")
     println("pairVal.second = ${pairVal.second}")
-    val (_, inTime) = inTime { Thread.sleep(200) }
-    println("inTime = $inTime")
+    val (_, inTime) = inNanoTime { Thread.sleep(200) }
+    println("inNanoTime = $inTime")
 
     val userService = UserService()
     userService.transformName(String::toLowerCase)

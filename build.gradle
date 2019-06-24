@@ -7,21 +7,67 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath "com.android.tools.build:gradle:3.4.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:latest.integration"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:latest.integration"
+
+    // For using function name to lambda(::funName) variable
+    implementation "org.jetbrains.kotlin:kotlin-reflect:latest.integration"
+
+    // For using coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:latest.integration"
+
+    // kotlin gson
+    implementation "com.github.salomonbrys.kotson:kotson:latest.integration"
+
+    // http4k
+    implementation("org.http4k:http4k-client-apache:latest.integration"){
+        exclude group: 'commons-logging', module: 'commons-logging'
     }
+
+    // JDBC(Java Database Connectivity)
+    implementation "org.springframework:spring-jdbc:latest.integration"
+
+    // H2 in-memory database
+    implementation "com.h2database:h2:latest.integration"
+
+//    implementation "javax.sql:jdbc-stdext:latest.integration"
+//    implementation "org.springframework.statemachine:spring-statemachine-core:latest.integration"
+//    implementation "org.springframework.boot:spring-boot-starter:latest.integration"
+
+//    implementation "nl.komponents.kovenant:kovenant:latest.integration"
+
+//    implementation 'com.h2database:h2:1.4.196'
+//    implementation("org.springframework:spring-jdbc:5.0.2.RELEASE") {
+//        exclude group: 'org.springframework', module: 'spring-jcl'
+//    }
+//    implementation 'org.http4k:http4k-client-apache:3.13.0'
+//    implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
+//    implementation 'nl.komponents.kovenant:kovenant:3.3.0'
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+compileKotlin {
+    kotlinOptions{
+        jvmTarget = "1.8"
+        freeCompilerArgs = ["-Xskip-runtime-version-check"]
+    }
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

@@ -6,7 +6,6 @@
  */
 package com.bhbac.kotlinstudysample
 
-
 import com.github.salomonbrys.kotson.*
 import com.google.gson.GsonBuilder
 import org.h2.jdbcx.JdbcDataSource
@@ -17,6 +16,13 @@ import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.queryForObject
 import java.util.*
+
+inline fun <T> inTime(body: () -> T): Pair<T, Long> {
+    val startTime = System.currentTimeMillis()
+    val v = body()
+    val endTime = System.currentTimeMillis()
+    return v to endTime - startTime
+}
 
 enum class Gender {
     MALE, FEMALE;
@@ -209,4 +215,143 @@ fun initJdbcTemplate(): JdbcTemplate {
                         "USERS(ID) ON DELETE RESTRICT)"
             )
         }
+}
+
+class MockUserRepository : UserRepository {
+    private val users = hashMapOf<UserId, User>()
+    override fun getUserById(id: UserId): User? {
+        println("MockUsrRepository.getUserById")
+        Thread.sleep(200)
+        return users[id]
+    }
+
+    override fun insertUser(user: User) {
+        println("MockUsreRepository.insertUser")
+        Thread.sleep(200)
+        users[user.id] = user
+    }
+}
+
+class MockFactRepository : FactRepository {
+    private val facts = hashMapOf<UserId, Fact>()
+    override fun getFactByUserId(id: UserId): Fact? {
+        println("MockFactRepository.getFactByUserId")
+        Thread.sleep(200)
+        return facts[id]
+    }
+
+    override fun insertFact(fact: Fact) {
+        println("MockFactRepository.insertFact")
+        Thread.sleep(200)
+        facts[fact.user?.id ?: 0] = fact
+    }
+}
+
+class SynchronousUserService(
+    private val userClient: UserClient,
+    private val factClient: FactClient,
+    private val userRepository: UserRepository,
+    private val factRepository: FactRepository
+) : UserService {
+    override fun getFact(id: UserId): Fact {
+        val user = userRepository.getUserById(id)
+        return if (user == null) {
+            val userFromService = userClient.getUser(id)
+            userRepository.insertUser(userFromService)
+            getFact(userFromService)
+        } else {
+            factRepository.getFactByUserId(id) ?: getFact(user)
+        }
+    }
+
+    private fun getFact(user: User): Fact {
+        val fact = factClient.getFact(user)
+        factRepository.insertFact(fact)
+        return fact
+    }
+}
+
+class CallbackUserClient(private val client: UserClient) {
+    fun getUser(id: Int, callback: (User) -> Unit) {
+        thread {
+            callback(client.getUser(id))
+        }
+    }
+}
+
+class CallbackFactClient(private val client: FactClient) {
+    fun get(user: User, callback: (Fact) -> Unit) {
+        thread {
+            callback(client.getFact(user))
+        }
+    }
+}
+
+class CallbackUserRepository(private val userRepository: UserRepository) {
+    fun getUserById(id: UserId, callback: (User?) -> Unit) {
+        thread {
+            callback(userRepository.getUserById(id))
+        }
+    }
+
+    fun insertUser(user: User, callback: () -> Unit) {
+        thread {
+            userRepository.insertUser(user)
+            callback()
+        }
+    }
+}
+
+class CallbackFactRepository(private val factRepository: FactRepository) {
+    fun getFactByUserId(id: Int, callback: (Fact?) -> Unit) {
+        thread {
+            callback(factRepository.getFactByUserId(id))
+        }
+    }
+
+    fun insertFact(fact: Fact, callback: () -> Unit) {
+        thread {
+            factRepository.insertFact(fact)
+            callback()
+        }
+    }
+}
+
+class CallbackUserService(
+    private val userClient: CallbackUsrClient,
+    private val factClient: CallbackFactClient,
+    private val userRepository: CallbackUserRepository,
+    private val factRepository: CallbackFactRepository
+) : UserService {
+    override fun getFact(id: UserId): Fact {
+        var aux: Fact? = null
+        userRepository.getUserById(id) { user ->
+            if (user == null) {
+                userClient.getUser(id) { userFromClient ->
+                    userRepository.insertUser(userFromClient) {}
+                    factClient.get(userFromClient) { fact ->
+                        factRepository.insertFact(fact) {}
+                        aux = fact
+                    }
+                }
+            } else {
+                factRepository.getFactByUserId(id) { fact ->
+                    if (fact == null) {
+                        factClient.get(user) { factFromClient ->
+                            factRepository.insertFact(factFromClient) {}
+                            aux = factFromClient
+                        }
+                    } else {
+                        aux = fact
+                    }
+                }
+            }
+        }
+
+        while (aux == null) {
+            Thread.sleep(2)
+        }
+
+        return aux!!
+    }
 }
