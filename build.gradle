@@ -1,0 +1,53 @@
+group 'com.packtpub'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:latest.integration'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:latest.integration'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:latest.integration'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:latest.integration'
+    implementation 'com.h2database:h2:latest.integration'
+    implementation 'org.springframework:spring-jdbc:latest.integration'
+    implementation 'org.http4k:http4k-client-apache:latest.integration'
+    implementation 'com.github.salomonbrys.kotson:kotson:latest.integration'
+    implementation 'nl.komponents.kovenant:kovenant:latest.integration'
+
+    implementation "io.reactivex.rxjava2:rxkotlin:+"
+    implementation "io.reactivex.rxjava2:rxjava:+"
+    
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions{
+        jvmTarget = "1.8"
+        freeCompilerArgs = ["-Xskip-runtime-version-check"]
+    }
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
