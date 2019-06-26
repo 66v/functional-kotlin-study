@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b6c0ef8-451f-4540-a786-ad8e48b97b56" name="Default Changelist" comment="" />
+    <list default="true" id="5b6c0ef8-451f-4540-a786-ad8e48b97b56" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt$calculateDiscount$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt$calculateDiscount$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt$mapWithFlatMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt$mapWithFlatMap$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10ClassesKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$3$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$functions$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$functions$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$functions$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt$main$functions$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/bhbac/kotlinstudysample/Chapter10TestKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Classes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Classes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -41,14 +60,14 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.41791046">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="350">
-                  <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+                <state relative-caret-position="356">
+                  <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -56,12 +75,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+        <leaf>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Classes.kt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="521">
-                  <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+                <state relative-caret-position="176">
+                  <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
@@ -93,6 +112,9 @@
       <replace />
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -104,12 +126,12 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter07Classes.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter09.kt" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Classes.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -120,35 +142,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="functionalkotlin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chapter07" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="funtional-kotlin-study" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="functionalkotlin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chapter07" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="funtional-kotlin-study" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="functionalkotlin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chapter07" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="funtional-kotlin-study" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="functionalkotlin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chapter07" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="funtional-kotlin-study" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="functionalkotlin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chapter07" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="funtional-kotlin-study" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
@@ -159,10 +180,13 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/kotlin" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -283,11 +307,20 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.16577825" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.16523606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -295,19 +328,20 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Learn" order="7" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.32891566" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32976446" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2815846" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2807229" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39937758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.3548387" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.35421687" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50074625" side_tool="true" weight="0.32949308" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49925372" weight="0.47965738" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49925372" weight="0.24939759" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -469,17 +503,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter02.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+        <state relative-caret-position="187">
+          <caret line="139" column="8" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Classes.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="176">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bhbac/kotlinstudysample/Chapter10Test.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
         </state>
       </provider>
     </entry>
