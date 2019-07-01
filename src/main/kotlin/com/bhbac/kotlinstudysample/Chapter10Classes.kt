@@ -54,7 +54,7 @@ fun <T, R> Option<T>.applicative(functions: Option<(T) -> R>): Option<R> = funct
     map(function)
 }
 
-infix fun <T, R> Option<(T) -> R>.`*`(option: Option<T>): Option<R> = flatMap { function: (T) -> R ->
+infix fun <T, R> Option<(T) -> R>.funcAdd(option: Option<T>): Option<R> = flatMap { function: (T) -> R ->
     option.map(function)
 }
 

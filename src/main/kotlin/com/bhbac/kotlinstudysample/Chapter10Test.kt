@@ -55,9 +55,9 @@ fun main() {
     })
 
     println("applicative : ${maybeTwo.applicative(maybeFive.map { f -> { t: Int -> f + t } })}")
-    println("`*` : ${Option.pure { p1: Int -> { p2: Int -> p1 + p2 } } `*` maybeFive `*` maybeTwo}")
-    println("`*2` : ${Option.pure { p1: Int -> { p2: Int -> p1 + p2 } } `*` maybeFive}")
-    println("`*3` : ${Option.pure { p1: Int -> { p2: Int -> { p3: Int -> p1 + p2 + p3 } } } `*` maybeFive `*` maybeFive `*` maybeTwo}")
+    println("funcAdd : ${Option.pure { p1: Int -> { p2: Int -> p1 + p2 } } funcAdd maybeFive funcAdd maybeTwo}")
+    println("`*2` : ${Option.pure { p1: Int -> { p2: Int -> p1 + p2 } } funcAdd maybeFive}")
+    println("`*3` : ${Option.pure { p1: Int -> { p2: Int -> { p3: Int -> p1 + p2 + p3 } } } funcAdd maybeFive funcAdd maybeFive funcAdd maybeTwo}")
 
     val f: (String) -> Int = Function2.pure(0)
     println(f("Hello,"))
