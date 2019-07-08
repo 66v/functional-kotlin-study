@@ -1,5 +1,7 @@
 package com.bhbac.kotlinstudysample
 
+import kotlin.system.measureNanoTime
+
 sealed class Option<out T> {
     object None : Option<Nothing>() {
         override fun toString() = "None"
@@ -60,4 +62,32 @@ infix fun <T, R> Option<(T) -> R>.funcAdd(option: Option<T>): Option<R> = flatMa
 
 object Function2 {
     fun <A, B> pure(b: B) = { _: A -> b }
+}
+
+fun recursiveFib(n: Long): Long = if (n < 2) {
+    n
+} else {
+    recursiveFib(n - 1) + recursiveFib(n - 2)
+}
+
+fun imperativeFib(n: Long): Long {
+    return when (n) {
+        0L -> 0
+        1L -> 1
+        else -> {
+            var a = 0L
+            var b = 1L
+            var c = 0L
+            for (i in 2 .. n) {
+                c = a + b
+                a = b
+                b = c
+            }
+            c
+        }
+    }
+}
+
+inline fun milliseconds(description: String, body: () -> Unit): String {
+    return "$description:${measureNanoTime(body) / 1_000_000.00} ms"
 }
