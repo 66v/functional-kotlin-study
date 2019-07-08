@@ -1,11 +1,21 @@
 package com.bhbac.kotlinstudysample
 
-import arrow.core.andThen
-import arrow.core.compose
+import arrow.core.identity
+import arrow.core.constant
+import arrow.core.PartialFunction
+import arrow.core.Predicate
+import arrow.core.invokeOrElse
+import arrow.core.orElse
 import arrow.syntax.function.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
 fun main() {
+    println(">>>>> 12장 테스트 시작 <<<<<")
+
     val p: (String) -> String = { body -> "<p>$body</p>" }
     val span: (String) -> String = { body -> "<span>$body</span>" }
     val div: (String) -> String = { body -> "<div>$body</div>" }
@@ -19,7 +29,7 @@ fun main() {
     }
     val divStrong: (String) -> String = div compose strong
     val spanP: (String) -> String = p andThen span
-    val randomStrong: (Unit) -> String = randomNames andThen strong andThen strong andThen spanP
+    val randomStrong: (Unit) -> String = randomNames forwardCompose strong forwardCompose strong forwardCompose spanP
     println(divStrong("헬로 컴포지션 월드~!"))
     println(spanP("헬로 컴포지션 월드~!"))
     println(randomStrong(Unit))
@@ -27,7 +37,7 @@ fun main() {
     println(randomStrong(Unit))
 
     var salesSystem: (Quote) -> Unit =
-            ::calculatePrice andThen ::filterBills andThen ::splitter
+            ::calculatePrice andThen ::filterBills forwardCompose ::splitter
     salesSystem(Quote(20.0, "Foo", "Shoes", 1))
     salesSystem(Quote(20.0, "Bar", "Shoes", 200))
     salesSystem(Quote(2000.0, "Foo", "Motorbike", 1))
@@ -45,20 +55,20 @@ fun main() {
 
     val splitter: (billAndOrder: Pair<Bill, PickingOrder>?) -> Unit =
             ::partialSplitter.partially2 { order -> println("테스트 $order") }(p2 = ::accounting)
-    salesSystem = ::calculatePrice andThen ::filterBills andThen splitter
+    salesSystem = ::calculatePrice andThen ::filterBills forwardCompose splitter
     salesSystem(Quote(20.0, "Foo", "Shoes", 1))
     salesSystem(Quote(20.0, "Bar", "Shoes", 200))
     salesSystem(Quote(2000.0, "Foo", "Motorbike", 1))
     // splitter 는 명시적 스타일 이후 파라메터가 2개로 줄어들었을때 암시적 스타일로 선언하여 이해하기 어렵지만
     // 아래와 같은 의미를 나타낸다.
     val sameSplitter: (billAndOrder: Pair<Bill, PickingOrder>?) -> Unit =
-            ::partialSplitter.partially2{ println("sameSplitter $it") }.partially2(::accounting)
-    salesSystem = ::calculatePrice andThen ::filterBills andThen sameSplitter
+            ::partialSplitter.partially2 { println("sameSplitter $it") }.partially2(::accounting)
+    salesSystem = ::calculatePrice andThen ::filterBills forwardCompose sameSplitter
     salesSystem(Quote(20.0, "Foo", "Shoes", 1))
     salesSystem(Quote(20.0, "Bar", "Shoes", 200))
     salesSystem(Quote(2000.0, "Foo", "Motorbike", 1))
 
-    val footer: (String) -> String = { content -> "<footer>$content</footer>"}
+    val footer: (String) -> String = { content -> "<footer>$content</footer>" }
     // parameter가 하나인 경우는 암시적인 스타일을 사용할 수 없다.
     // 함수가 실행되어 버리기 때문.
     //fixFooter = footer(p1 = "Functional Kotlin - 2018")
@@ -89,4 +99,76 @@ fun main() {
     println(uncurriedGreenStrong("movie 6", "Green Hornet"))
     "Fried Green Tomatoes" pipe ("movie 7" pipe greenStrong) pipe ::println
 
+    println(newStrong.curried()("Batman Begins")("trilogy1")("color: black"))
+    println(newStrong("The Dark Knight")("trilogy2")("color: black"))
+    println(newStrong(p2 = "trilogy3")(p2 = "color: black")("The Dark Knight rises"))
+
+    val evenPredicate: Predicate<Int> = { i: Int -> i % 2 == 0 }
+    val oddPredicate: (Int) -> Boolean = evenPredicate.complement()
+    val numbers: IntRange = 1..10
+    val evenNumbers: List<Int> = numbers.filter(evenPredicate)
+    val oddNumbers: List<Int> = numbers.filter(oddPredicate)
+    println(evenNumbers)
+    println(oddNumbers)
+
+    var lambdaFib: (Long) -> Long = { it }
+    lambdaFib = { n: Long ->
+        if (n < 2) n else lambdaFib(n - 1) + lambdaFib(n - 2)
+    }
+    var memoizedFib: (Long) -> Long = { it }
+    memoizedFib = { n: Long ->
+        if (n < 2) n else memoizedFib(n - 1) + memoizedFib(n - 2)
+    }.memoize()
+    println(milliseconds("명령형 피보나치") { imperativeFib(40) })
+    println(milliseconds("재귀 피보나치") { recursiveFib(40) })
+    println(milliseconds("람다 피보나치") { lambdaFib(40) })
+    println(milliseconds("메모이제이션 피보나치") { memoizedFib(40) })
+
+//    val repeatTime = 10
+    val repeatTime = 1
+    val job = CoroutineScope(Dispatchers.Default).launch {
+        repeat(repeatTime) { i ->
+            launch { println(milliseconds("코루틴 $i - 명령형 피보나치") { imperativeFib(40) }) }
+            launch { println(milliseconds("코루틴 $i - 재귀 피보나치") { recursiveFib(40) }) }
+            launch { println(milliseconds("코루틴 $i - 람다 피보나치") { lambdaFib(40) }) }
+            launch { println(milliseconds("코루틴 $i - 메모이제이션 피보나치") { memoizedFib(40) }) }
+        }
+    }
+    runBlocking {
+        println("종료 대기중")
+        job.join()
+    }
+
+    val sampleList = listOf("one", "two", null, "four")
+    val upper: (String?) -> String = { s: String? -> s!!.toUpperCase() }
+    // NPE(NullPointerException)
+    //sampleList.map(upper).forEach(::println)
+    val partialUpper: PartialFunction<String?, String> =
+            PartialFunction(definedAt = { s: String? -> (s != null) }, ifDefined = upper)
+    // IAE(IllegalArgumentException)
+    //sampleList.map(partialUpper).forEach(::println)
+    sampleList.map { s -> partialUpper.invokeOrElse(s, "NULL") }.forEach(::println)
+
+    val upperForNull = PartialFunction<String?, String>({ s -> s == null }) { "NULL" }
+    val totalUpper = partialUpper orElse upperForNull
+    sampleList.map(totalUpper).forEach(::println)
+
+    var fizz = PartialFunction({ n: Int -> n % 3 == 0 }) { "FIZZ" }
+    var buzz = PartialFunction({ n: Int -> n % 5 == 0 }) { "BUZZ" }
+    var fizzBuzz = PartialFunction({ n: Int -> fizz.isDefinedAt(n) && buzz.isDefinedAt(n) }) { "FIZZBUZZ" }
+    var pass = PartialFunction({ true }) { n: Int -> n.toString() }
+    (1..50).map(fizzBuzz orElse buzz orElse fizz orElse pass).forEach(::println)
+
+    val oneToFour = 1..4
+    println("항등 : ${oneToFour.map(::identity).joinToString()}")
+    println("상수 : ${oneToFour.map(constant(1)).joinToString()}")
+
+    fizz = PartialFunction({ n: Int -> n % 3 == 0 }, constant("FIZZ"))
+    buzz = PartialFunction({ n: Int -> n % 5 == 0 }, constant("BUZZ"))
+    fizzBuzz = PartialFunction({ n: Int -> fizz.isDefinedAt(n) && buzz.isDefinedAt(n) }, constant("FIZZBUZZ"))
+    pass = PartialFunction(constant(true)) { n: Int -> n.toString() }
+    (1..50).map(fizzBuzz orElse buzz orElse fizz orElse pass).forEach(::println)
+
+
+    println(">>>>> 12장 테스트 종료 <<<<<")
 }
