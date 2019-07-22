@@ -1,11 +1,17 @@
 package com.bhbac.kotlinstudysample
 
+<<<<<<< HEAD
 import arrow.core.identity
 import arrow.core.constant
 import arrow.core.PartialFunction
 import arrow.core.Predicate
 import arrow.core.invokeOrElse
 import arrow.core.orElse
+=======
+import arrow.core.Predicate
+import arrow.core.andThen
+import arrow.core.compose
+>>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
 import arrow.syntax.function.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -124,10 +130,15 @@ fun main() {
     println(milliseconds("람다 피보나치") { lambdaFib(40) })
     println(milliseconds("메모이제이션 피보나치") { memoizedFib(40) })
 
+<<<<<<< HEAD
 //    val repeatTime = 10
     val repeatTime = 1
     val job = CoroutineScope(Dispatchers.Default).launch {
         repeat(repeatTime) { i ->
+=======
+    val job = CoroutineScope(Dispatchers.Default).launch {
+        repeat(10) { i ->
+>>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
             launch { println(milliseconds("코루틴 $i - 명령형 피보나치") { imperativeFib(40) }) }
             launch { println(milliseconds("코루틴 $i - 재귀 피보나치") { recursiveFib(40) }) }
             launch { println(milliseconds("코루틴 $i - 람다 피보나치") { lambdaFib(40) }) }
@@ -139,6 +150,7 @@ fun main() {
         job.join()
     }
 
+<<<<<<< HEAD
     val sampleList = listOf("one", "two", null, "four")
     val upper: (String?) -> String = { s: String? -> s!!.toUpperCase() }
     // NPE(NullPointerException)
@@ -170,5 +182,7 @@ fun main() {
     (1..50).map(fizzBuzz orElse buzz orElse fizz orElse pass).forEach(::println)
 
 
+=======
+>>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
     println(">>>>> 12장 테스트 종료 <<<<<")
 }
