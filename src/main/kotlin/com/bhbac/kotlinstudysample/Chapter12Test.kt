@@ -1,18 +1,13 @@
 package com.bhbac.kotlinstudysample
 
-<<<<<<< HEAD
 import arrow.core.identity
 import arrow.core.constant
 import arrow.core.PartialFunction
 import arrow.core.Predicate
 import arrow.core.invokeOrElse
 import arrow.core.orElse
-=======
-import arrow.core.Predicate
-import arrow.core.andThen
-import arrow.core.compose
->>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
 import arrow.syntax.function.*
+import arrow.optics.Lens
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -130,15 +125,10 @@ fun main() {
     println(milliseconds("람다 피보나치") { lambdaFib(40) })
     println(milliseconds("메모이제이션 피보나치") { memoizedFib(40) })
 
-<<<<<<< HEAD
 //    val repeatTime = 10
     val repeatTime = 1
     val job = CoroutineScope(Dispatchers.Default).launch {
         repeat(repeatTime) { i ->
-=======
-    val job = CoroutineScope(Dispatchers.Default).launch {
-        repeat(10) { i ->
->>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
             launch { println(milliseconds("코루틴 $i - 명령형 피보나치") { imperativeFib(40) }) }
             launch { println(milliseconds("코루틴 $i - 재귀 피보나치") { recursiveFib(40) }) }
             launch { println(milliseconds("코루틴 $i - 람다 피보나치") { lambdaFib(40) }) }
@@ -150,7 +140,6 @@ fun main() {
         job.join()
     }
 
-<<<<<<< HEAD
     val sampleList = listOf("one", "two", null, "four")
     val upper: (String?) -> String = { s: String? -> s!!.toUpperCase() }
     // NPE(NullPointerException)
@@ -181,8 +170,31 @@ fun main() {
     pass = PartialFunction(constant(true)) { n: Int -> n.toString() }
     (1..50).map(fizzBuzz orElse buzz orElse fizz orElse pass).forEach(::println)
 
+    val laptopX8 = Laptop(500.0, MotherBoard("X", Memory(8)))
+    val laptopX16 = laptopX8.copy(
+            price = 900.0,
+            motherBoard = laptopX8.motherBoard.copy(
+                    memory = laptopX8.motherBoard.memory.copy(
+                            size = laptopX8.motherBoard.memory.size * 2
+                    )
+            )
+    )
+    println("laptopX16 = $laptopX16")
+    val laptopMemorySize: Lens<Laptop, GB> =
+            laptopMotherBoard compose motherBoardMemory compose memorySize
+    val laptopX24 = laptopMemorySize.modify(
+            laptopPrice.set(laptopX8, 1300.0)) { size -> size * 3 }
+    println("laptopX24 = $laptopX24")
+    val laptopX32 = laptopMemorySize.set(
+            laptopPrice.set(laptopX8, 1500.0), laptopX8.motherBoard.memory.size * 4)
+    println("laptopX32 = $laptopX32")
 
-=======
->>>>>>> 5904200ac064fa21a2c8b70425d2812aa7cab54f
+    val laptop2X8 = Laptop2(500.0, MotherBoard2("X", Memory2(8)))
+    val laptop2MemorySize: Lens<Laptop2, GB2> =
+            Laptop2.motherBoard compose MotherBoard2.memory compose Memory2.size
+    val laptop2X16 = laptop2MemorySize.modify(
+            Laptop2.price.set(laptop2X8, 780.0)) { size -> size * 2 }
+    println("laptop2X16 = $laptop2X16")
+
     println(">>>>> 12장 테스트 종료 <<<<<")
 }
